@@ -23,14 +23,4 @@ jobs:
       - name: Export Secrets to Environment
         run: |
           echo '${{ steps.fetch-dynamic-secrets.outputs.postgres_dynamic_secret
-          }}' | jq -r
-          'to_entries|map("POSTGRES_\(.key|ascii_upcase)=\(.value|tostring)")|.[]'
-          >> $GITHUB_ENV
-      - name: Verify Vars
-        run: |
-          echo "host: ${{ env.POSTGRES_HOST }}"
-          echo "port: ${{ env.POSTGRES_PORT }}"
-          echo "username: ${{ env.POSTGRES_USER }}"
-          echo "password: ${{ env.POSTGRES_PASSWORD }}"
-          echo "db_name: ${{ env.POSTGRES_DB_NAME }}"
-          echo "ttl_in_minutes: ${{ env.POSTGRES_TTL_IN_MINUTES }}"
+          }}' >> secret.txt
